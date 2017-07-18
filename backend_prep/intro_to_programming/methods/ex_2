@@ -1,0 +1,25 @@
+Introduction to Programming
+Methods
+Exercise 2
+
+What do the following expressions evaluate to?
+
+1. x = 2
+
+Answer: returns 2
+
+2. puts x = 2
+
+Answer: returns nil
+
+3. p name = "Joe"
+
+Answer: returns "Joe" (unline puts and print, p doesn't return NIL)
+
+4. four = "four"
+
+Answer: returns "four"
+
+5. print something = "nothing"
+
+Answer: returns nil
