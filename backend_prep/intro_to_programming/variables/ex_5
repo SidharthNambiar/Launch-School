@@ -1,0 +1,32 @@
+Introduction to Programming
+Variables
+Exercise 5
+
+Look at the following programs...
+
+case 1
+x = 0
+3.times do
+x += 1
+end
+puts x
+
+and...
+case 2
+y = 0
+3.times do
+y += 1
+x = y
+end
+puts x
+
+What does x print to the screen in each case? 
+case 1: x prints 3
+case 2: puts is unable to access x since it's outside the scope
+
+Do they both give errors? 
+case 1: no error occurs
+case 2: error occurs
+
+Are the errors different? Why?
+No, since case 1 has no errors
