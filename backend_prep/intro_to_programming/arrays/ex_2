@@ -1,0 +1,23 @@
+# Introduction to Programming
+# Arrays
+# Exercise 2
+
+1. What will the following programs return? 
+2. What is value of arr after each?
+
+1. arr = ["b", "a"]
+   arr = arr.product(Array(1..3))
+   arr.first.delete(arr.first.last)
+
+   Answer 1: it will return 1, since that's the value being deleted
+   Answer 2: The delete method is destructive and therefore returns the modifed array.
+   irb: => [["b"], ["b", 2], ["b", 3], ["a", 1], ["a", 2], ["a", 3]]
+
+
+2. arr = ["b", "a"]
+   arr = arr.product([Array(1..3)])
+   arr.first.delete(arr.first.last)
+
+   Answer 1: it will return [1,2,3], since that's the value being deleted
+   Answer 2: The delete method is destructive and therefore returns the modifed array.
+   irb: => [["b"], ["a", [1, 2, 3]]]
