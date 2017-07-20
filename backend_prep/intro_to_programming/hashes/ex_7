@@ -1,0 +1,17 @@
+# Introduction to Programming
+# Hashes
+# Exercise 7
+
+
+Given the following code...
+
+x = "hi there"
+my_hash = {x: "some value"}
+my_hash2 = {x => "some value"}
+What's the difference between the two hashes that were created?
+
+Answer:
+
+In my_hash, the key x: is a symbol (data type) that has a string (data type) as its value called "some value"
+
+In my_hash2, the key is variable that points to string (data type) called "hi there" that also has a value called "some value", which is also a string.
