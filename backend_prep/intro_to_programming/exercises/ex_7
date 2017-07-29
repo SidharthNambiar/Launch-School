@@ -1,0 +1,8 @@
+Introduction to Programming
+Exercises
+Exercise 7
+
+What's the major difference between an Array and a Hash?
+
+Arrays are data structures that store individual values in a set order.
+Whereas, in a hash, stored values are paired with a key for referencing purposes.
