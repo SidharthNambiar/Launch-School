@@ -1,0 +1,15 @@
+Ruby Basics
+Ruby Documentation 1
+Exercise 5: Large Numbers
+
+Using the ruby documentation, determine how you can write large numbers in a way that makes them easier to read.
+
+Answer:
+
+You can write integers of any size as follows:
+
+123456 is the same as 123_456
+
+source: https://ruby-doc.org/core-2.3.1/doc/syntax/literals_rdoc.html
+
+

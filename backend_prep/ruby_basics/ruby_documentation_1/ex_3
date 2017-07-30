@@ -1,0 +1,11 @@
+Ruby Basics
+Ruby Documentation 1
+Exercise 3: Return Value of while
+
+Using the ruby documentation, determine what value a while loop returns.
+
+Answer:
+
+The result of a while loop is nil unless break is used to supply a value.
+
+source: https://ruby-doc.org/core-2.3.1/doc/syntax/control_expressions_rdoc.html
