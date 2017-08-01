@@ -1,6 +1,6 @@
 # Ruby Basics
 # Loop 1
-# Exercise 5: Print While
+# Exercise 6: Print While
 
 # Using a while loop, print 5 random numbers between 0 and 99. 
 
