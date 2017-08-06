@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 8: Sleep Alert
 
 # In the code below, status is randomly assigned as 'awake' or 'tired'.

@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 4: True or False
 
 # In the code below, boolean is randomly assigned as true or false.

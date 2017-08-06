@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 5: Truthy Number
 
 # What will the following code print? Why? 

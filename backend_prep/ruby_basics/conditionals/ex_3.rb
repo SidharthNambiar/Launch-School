@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 3: Unpredictable Weather (Part 3)
 
 # In the code below, sun is randomly assigned as 'visible' or 'hidden'.

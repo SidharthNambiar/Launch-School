@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 7: Stoplight (Part 2)
 
 # Convert the following case statement to an if statement.

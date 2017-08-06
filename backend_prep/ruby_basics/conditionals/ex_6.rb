@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 6: Stoplight (Part 1)
 
 # In the code below, stoplight is randomly assigned as 'green', 'yellow', or 'red'.

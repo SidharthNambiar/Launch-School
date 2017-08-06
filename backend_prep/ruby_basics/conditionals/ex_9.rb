@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 9: Cool Numbers
 
 # In the code below, number is randomly assigned a number between 0 and 9. 

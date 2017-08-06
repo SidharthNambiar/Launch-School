@@ -1,5 +1,5 @@
 # Ruby Basics
-# Return 
+# Conditionals 
 # Exercise 10: Stoplight (Part 3)
 
 # Reformat the following case statement so that it only takes up 5 lines.
