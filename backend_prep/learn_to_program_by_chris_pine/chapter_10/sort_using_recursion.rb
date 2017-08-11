@@ -1,11 +1,10 @@
 # Learn To Program
 # Chapter 10: There's Nothing New to Learn in Chapter 10
-# sorting without recursion
+# sorting using recursion
 
 # smallest to largest
 
 unsorted = ["cat", "zebra","tiger", "cat"]
-
 
 def find_min(arr)
   smallest_value = arr.first
@@ -17,18 +16,21 @@ def find_min(arr)
   smallest_value
 end
 
-def sort(unsorted_array)
-  sorted = []
-  while unsorted_array.length > 0
-    index_to_delete = unsorted_array.index(find_min(unsorted_array))
-    sorted << unsorted_array.delete_at(index_to_delete) 
-  end
-  return sorted
+def sort_recursively(unsorted_array, sorted_array=[])
+  sorted_array << unsorted_array.delete_at(unsorted_array.index(find_min(unsorted_array)))
+  sort_recursively(unsorted_array, sorted_array) unless unsorted_array.size.zero?
+  sorted_array
 end
-  
+
 puts "Here's the unsorted array:"
 p unsorted
 puts "\nHere's the sorted array:"
-p sort(unsorted)
+p sort_recursively(unsorted)
+
+
+
+
+
+
 
 
