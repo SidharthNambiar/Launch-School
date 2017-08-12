@@ -8,6 +8,8 @@
 
 unsorted = ["my", "is","York", "New", "world"]
 
+# FYI: Ruby has a built-in minimum method
+
 def find_min(arr)
   smallest_value = arr.first
   for value in arr

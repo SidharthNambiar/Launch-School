@@ -2,7 +2,7 @@
 # Chapter 9: Writing Your Own Methods
 # Exercise 2
 
-# Old-school Roman numerals (9 = VIIII,not IX)
+# Old-school Roman numerals (9 = VIIII,not IX; 4 = IIII, not IV)
 
 # I = 1     V = 5     X = 10   L = 50
 # C = 100   D = 500   M = 1000
