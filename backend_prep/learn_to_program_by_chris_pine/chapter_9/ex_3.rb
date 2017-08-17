@@ -27,8 +27,8 @@ def new_roman_numeral(number)
   elsif hundreds_place == 4
     roman << "CD"
   else
-     roman = roman << 'D' * (num%1000 /500)
-      roman = roman << 'C' * (num%500  /100)
+     roman = roman << 'D' * (number%1000 /500)
+      roman = roman << 'C' * (number%500  /100)
   end
 
   if tens_place == 9
@@ -36,8 +36,8 @@ def new_roman_numeral(number)
   elsif tens_place == 4
     roman << "XL"
   else
-    roman = roman << 'L' * (num%100  /50)
-    roman = roman << 'X' * (num%50   /10)
+    roman = roman << 'L' * (number%100  /50)
+    roman = roman << 'X' * (number%50   /10)
   end
 
 
@@ -46,8 +46,8 @@ def new_roman_numeral(number)
   elsif ones_place == 4
     roman << "IV"
   else
-    roman = roman << 'V' * (num%10   /5)
-    roman = roman << 'I' * (num%5)
+    roman = roman << 'V' * (number%10   /5)
+    roman = roman << 'I' * (number%5)
   end
     
 
