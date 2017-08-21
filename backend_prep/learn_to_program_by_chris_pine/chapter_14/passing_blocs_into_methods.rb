@@ -13,7 +13,9 @@ class Array
       end
       is_even = !is_even
     end
+
   end
+  
 end
 
 fruits = ['apple', 'bad apple', 'cherry', 'durian']
