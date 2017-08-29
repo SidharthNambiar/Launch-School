@@ -2,13 +2,6 @@
 # Lesson 2: Small Programs
 # calculator.rb
 
-    
-# Build a command line calculator program that does the following:
-
-# asks for two numbers
-# asks for the type of operation to perform: add, subtract, multiply or divide
-# displays the result
-
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
@@ -30,16 +23,14 @@ def operation_to_message(op)
   end
 end
 
-
 # declare and initialize the variables
 number1 = ''
 number2 = ''
 name = ''
 operator = ''
 
-prompt("Welcome to Calculator! Enter your name:")
+prompt"Welcome to Calculator! Enter your name:"
 
-  
 loop do
   name = Kernel.gets().chomp()
 
@@ -52,30 +43,27 @@ end
 
 prompt("Hi #{name}!")
 loop do # main loop
-
-  loop do 
-    prompt("What's the first number?")
+  loop do
+    prompt"What's the first number?"
     number1 = Kernel.gets().chomp()
 
     if valid_number?(number1)
       break
     else
-      prompt("Invalid entry!")
+      prompt"Invalid entry!"
     end
   end
 
-
-  loop do 
-    prompt("What's the second number?")
+  loop do
+    prompt"What's the second number?"
     number2 = Kernel.gets().chomp()
 
     if valid_number?(number2)
       break
     else
-      prompt("Invalid entry!")
+      prompt"Invalid entry!"
     end
   end
-
 
   operator_prompt = <<-MSG
     What operation would you like to perform?
@@ -85,15 +73,15 @@ loop do # main loop
     4) divide
   MSG
 
-  prompt(operator_prompt)
-  
-  loop do 
+  prompt operator_prompt
+
+  loop do
     operator = Kernel.gets().chomp()
 
     if %w(1 2 3 4).include?(operator)
       break
     else
-      prompt("Must choose 1, 2, 3, or 4.")
+      prompt"Must choose 1, 2, 3, or 4."
     end
   end
 
@@ -105,29 +93,29 @@ loop do # main loop
     elsif operator == '3'
       result = number1.to_i * number2.to_i
     else
-      result = number1.to_f / number2.to_f    
+      result = number1.to_f / number2.to_f
     end
 =end
 
-prompt("#{operation_to_message(operator)} the two numbers...")
+  prompt "#{operation_to_message(operator)} the two numbers..."
 
   result = case operator
            when '1'
-            number1.to_i + number2.to_i()
+             number1.to_i + number2.to_i()
            when '2'
-            number1.to_i - number2.to_i()
+             number1.to_i - number2.to_i()
            when '3'
-            number1.to_i * number2.to_i()
+             number1.to_i * number2.to_i()
            when '4'
-            number1.to_f / number2.to_f()
-  end
+             number1.to_f / number2.to_f()
+           end
 
-  prompt("The result is #{result}")
+  prompt"The result is #{result}"
 
-  prompt("Do you want to perform another calculation? (Y to calculate again)")
+  prompt"Do you want to perform another calculation? (Y to calculate again)"
   answer = Kernel.gets().chomp()
 
   break unless answer.downcase().start_with?('y')
 end # end main loop
 
-prompt("Thank you for using the calculator! Good bye!")
+prompt"Thank you for using the calculator! Good bye!"
