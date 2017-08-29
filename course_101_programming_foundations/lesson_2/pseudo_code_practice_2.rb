@@ -4,7 +4,7 @@
 # a method that takes an array of strings, 
 # and returns a string that is all those strings concatenated together
 
-/
+=begin
   Given: array of strings. Example: ["hello", "world"]
 
   - Declare and instantiate an empty string.
@@ -27,16 +27,21 @@
     count += 1
 
   PRINT concatenated_string
-/
 
+  END
+
+=end
 array = ["I", "live", "in", "Japan"]
 
-concatenated_string = ''
-count = 0
+def concatenate_string(array)
+  concatenated_string = ''
+  count = 0
 
-while count < array.length
-  concatenated_string << array[count] << " "
-  count += 1
+  while count < array.length
+    concatenated_string << array[count] << " "
+    count += 1
+  end
+  concatenated_string
 end
 
-puts concatenated_string
+puts concatenate_string(array)

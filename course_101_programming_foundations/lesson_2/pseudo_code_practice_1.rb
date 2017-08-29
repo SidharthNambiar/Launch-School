@@ -3,7 +3,7 @@
 # Pseudo Code Practice: 
 # a method that returns the sum of two integers
 
-/
+=begin
   Given 2 integers.
   
 - Define a method that accepts 2 integers.
@@ -24,7 +24,7 @@
   PRINT addition(num1,num2)
 
   END
-/
+=end
 
 def addition(num1, num2)
   num1 + num2
