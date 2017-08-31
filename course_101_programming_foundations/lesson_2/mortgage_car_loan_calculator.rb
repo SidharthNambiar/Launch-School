@@ -40,6 +40,7 @@ def monthly_payment(amount, interest, duration)
 end
 
 # Initialize local variables
+
 name = ''
 loan_amount = ''
 annual_percentage_rate = ''
@@ -52,6 +53,7 @@ prompt MESSAGES['welcome']
 
 # Grabbing the user's name and making sure the user
 # can't bypass this step by hitting "ENTER"
+
 loop do
   # The chomp method must be invoked on the return value
   # of gets in order to get rid of the new line character (\n)
@@ -97,6 +99,7 @@ loop do
   # Prompt user to enter the loan duration in months
 
   prompt MESSAGES['enter_loan_duration']
+
   loop do
     loan_duration_months = gets.chomp
 
@@ -123,6 +126,7 @@ loop do
   monthly_interest_rate = annual_percentage_rate / 1200
 
   # perform calculation
+
   monthly_amount = monthly_payment(loan_amount,
                                    monthly_interest_rate,
                                    loan_duration_months)
