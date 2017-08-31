@@ -20,7 +20,7 @@ require 'yaml'
 require 'pry'
 
 # Load YAML
-# The Ruby Standard Library parses the date from the 'yml' file into a hash.
+# The Ruby Standard Library parses the data from the 'yml' file into a hash.
 
 MESSAGES = YAML.load_file('mortgage_car_loan_calculator.yml')
 
