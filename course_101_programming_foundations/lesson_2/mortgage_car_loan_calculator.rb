@@ -66,6 +66,8 @@ loop do
   end
 end
 
+# Entering main loop
+
 loop do
   # Prompt user to enter the loan amount
   prompt MESSAGES['enter_loan_amount']
@@ -138,5 +140,7 @@ loop do
 
   break if answer.downcase != 'y'
 end
+
+# exited main loop
 
 prompt MESSAGES['goodbye_message']
