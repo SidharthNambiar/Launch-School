@@ -5,6 +5,13 @@ valid_name: "Please enter a valid name."
 enter_loan_amount: "Please enter the loan amount."
 invalid_entry: "Invalid entry. Try again!"
 enter_apr_amount: "Please enter the Annual Percentage Rate(APR %)."
+apr_out_of_range: "The APR entered is invalid. Must be between 0 and 100%!"
 enter_loan_duration: "Please enter the loan period in months."
+invalid_loan_amount: "The loan amount must be greater than 0."
+invalid_loan_duration: "The loan duration must be greater than 0."
+calculate_again: "Would you like to calculate again? Enter 'Y' to calculate again."
+goodbye_message: "Thank you for using the calculator. Good bye!"
+
+
 
 
