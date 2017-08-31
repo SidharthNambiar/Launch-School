@@ -1,0 +1,111 @@
+# 101 Programming Foundations
+# Lesson 2: Small Programs
+# Mortgage/Car Loan Calculator
+
+# Note: floating point values will be truncated
+# to a precision of 2 decimal digits
+
+# User Input
+# loan amount($): floating point
+# APR(%): floating point
+# loan duration(months): integer
+
+# Program to calculate
+# monthly interest rate(%): APR/12; floating point
+# monthly payment calulation = m = p * (j / (1 - (1 + j)**(-n)))
+
+# Include necessary modules
+
+require 'yaml'
+require 'pry'
+
+# Load YAML
+# The Ruby Standard Library parses the date from the 'yml' file into a hash.
+
+MESSAGES = YAML.load_file('mortgage_car_loan_calculator.yml')
+
+# Method definitions
+
+def prompt(message)
+  puts "=> #{message}"
+end
+
+def valid_number?(num)
+  (num == num.to_f.to_s) || (num == num.to_i.to_s)
+end
+
+# Initialize local variables
+name = ''
+loan_amount = ''
+annual_percentage_rate = ''
+loan_duration_months = ''
+
+# Begin Interaction with user
+
+prompt MESSAGES['welcome']
+
+# Grabbing the user's name and making sure the user
+# can't bypass this step by hitting "ENTER"
+
+loop do
+  # The chomp method must be invoked on the return value
+  # of gets in order to get rid of the new line character (\n)
+  name = gets.chomp
+  if name.empty?
+    prompt MESSAGES['valid_name']
+  else
+    prompt "Hi #{name}!"
+    break
+  end
+end
+
+# Prompt user to enter the loan amount
+
+prompt MESSAGES['enter_loan_amount']
+loop do
+  loan_amount = gets.chomp
+
+  if valid_number?(loan_amount)
+    loan_amount = loan_amount.to_f.truncate(2)
+    break
+  else
+    prompt MESSAGES['invalid_entry']
+  end
+end
+
+# Prompt user to enter the Annual Percentage Rate (APR)
+
+prompt MESSAGES['enter_apr_amount']
+loop do
+  annual_percentage_rate = gets.chomp
+
+  if valid_number?(annual_percentage_rate)
+    annual_percentage_rate = annual_percentage_rate.to_f.truncate(2)
+    break
+  else
+    prompt MESSAGES['invalid_entry']
+  end
+end
+
+# Prompt user to enter the loan duration in months
+
+prompt MESSAGES['enter_loan_duration']
+loop do
+  loan_duration_months = gets.chomp
+
+  if valid_number?(loan_duration_months)
+    loan_duration_months = loan_duration_months.to_i
+    break
+  else
+    prompt MESSAGES['invalid_entry']
+  end
+end
+
+user_inputs = <<MSG
+  #{name}, the monthly payment will now be calculated based on the information below:
+  1. Loan amount of $#{loan_amount}
+  2. APR of #{annual_percentage_rate}%
+  3. Loan duration of #{loan_duration_months} months
+MSG
+
+prompt user_inputs

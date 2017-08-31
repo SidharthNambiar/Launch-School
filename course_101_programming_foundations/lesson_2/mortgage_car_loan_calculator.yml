@@ -1,0 +1,10 @@
+# mortgage_car_loan_calculator.yml
+
+welcome: "Welcome to the Mortgage/Loan Calculator! Please enter your name:"
+valid_name: "Please enter a valid name."
+enter_loan_amount: "Please enter the loan amount."
+invalid_entry: "Invalid entry. Try again!"
+enter_apr_amount: "Please enter the Annual Percentage Rate(APR %)."
+enter_loan_duration: "Please enter the loan period in months."
+
+
