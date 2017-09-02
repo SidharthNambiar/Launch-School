@@ -8,7 +8,7 @@
 # User Input
 # loan amount($): floating point
 # APR(%): floating point
-# loan duration(months): integer
+# loan duration(months): floating point
 
 # Program to calculate
 # monthly interest rate(%): APR/12; floating point
@@ -23,6 +23,10 @@ require 'pry'
 # The Ruby Standard Library parses the data from the 'yml' file into a hash.
 
 MESSAGES = YAML.load_file('mortgage_car_loan_calculator.yml')
+
+# Define CONSTANTS
+MIN_APR = 1  # represents 1%
+MAX_APR = 50 # represents 50% 
 
 # Method definitions
 
@@ -50,6 +54,7 @@ monthly_interest_rate = nil
 # Begin Interaction with user
 
 prompt MESSAGES['welcome']
+
 
 # Grabbing the user's name and making sure the user
 # can't bypass this step by hitting "ENTER"
@@ -91,8 +96,8 @@ loop do
 
     if valid_number?(annual_percentage_rate)
       annual_percentage_rate = annual_percentage_rate.to_f.truncate(2)
-      break if annual_percentage_rate.between?(0, 100)
-      prompt MESSAGES['apr_out_of_range']
+      break if annual_percentage_rate.between?(MIN_APR, MAX_APR)
+      prompt "APR must be between #{MIN_APR}% and #{MAX_APR}%."
     else
       prompt MESSAGES['invalid_entry']
     end
@@ -106,7 +111,7 @@ loop do
     loan_duration_months = gets.chomp
 
     if valid_number?(loan_duration_months)
-      loan_duration_months = loan_duration_months.to_i
+      loan_duration_months = loan_duration_months.to_f.truncate(2)
       break if loan_duration_months > 0
       prompt MESSAGES['invalid_loan_duration']
     else
