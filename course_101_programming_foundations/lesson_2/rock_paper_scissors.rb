@@ -18,7 +18,7 @@ def test_method
 end
 
 # Method to address Rubocop's warning against cyclomatic complexity
-# win? method returns a boolen value
+# win? method returns a boolean value
 # Extracted the winning logic to the win? method
 
 def win?(first, second)
