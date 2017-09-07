@@ -25,7 +25,7 @@ require 'pry'
 
 VALID_CHOICES = { 'r' => "rock", 'p' => "paper", 's' => "scissors",
                   'l' => "lizard", 'S' => "Spock" }
-WINNING_COUNT = 5
+POINTS_TO_WIN = 5
 
 WINNING_MOVES = { 'r' => ['l', 's'], 'l' => ['p', 'S'],
                   'S' => ['r', 's'], 's' => ['l', 'p'],
@@ -46,35 +46,46 @@ def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
-def result(player, computer)
+def who_won?(player, computer)
   if WINNING_MOVES[player].include?(computer)
     return "player"
   end
+
   if WINNING_MOVES[computer].include?(player)
     return "computer"
   end
 end
 
-def display_result(winner_of_round, rnd, player_total, computer_total)
+def display_round_result(winner_of_round, round_num, pl_tally, comp_tally)
   if winner_of_round == "player"
-    prompt("You won round #{rnd}!")
+    prompt("You won round #{round_num}!")
   elsif winner_of_round == "computer"
-    prompt("Computer won round #{rnd}!")
+    prompt("Computer won round #{round_num}!")
   else
-    prompt("Round #{rnd} is a tie!")
+    prompt("Round #{round_num} is a tie!")
   end
+
   prompt("Scoreboard:")
-  prompt("<PLAYER> = #{player_total}")
-  prompt("<COMPUTER> = #{computer_total}")
+  prompt("<PLAYER>   = #{pl_tally}")
+  prompt("<COMPUTER> = #{comp_tally}")
+end
+
+def display_final_result(player_total, computer_total)
+  if player_total > computer_total
+    prompt("You won the game. Congratulations!")
+  else
+    prompt("You lost the game. Sorry!")
+  end
 end
 
 def play_again?
   prompt("Would you like to play again? (Enter 'y' to play again.)")
+
   answer = Kernel.gets().chomp()
   if answer.downcase.start_with?('y')
-    true
+    "yes"
   else
-    false
+    "no"
   end
 end
 
@@ -85,7 +96,7 @@ prompt("Welcome to Rock, Paper, Scissors, Lizard, Spock!")
 # main loop
 
 loop do
-  while player_points < WINNING_COUNT && computer_points < WINNING_COUNT
+  while player_points < POINTS_TO_WIN && computer_points < POINTS_TO_WIN
 
     round += 1
 
@@ -122,23 +133,20 @@ loop do
     prompt("You chose: #{VALID_CHOICES[choice]}")
     prompt("Computer chose: #{VALID_CHOICES[computer_choice]}")
 
-    winner = result(choice, computer_choice)
+    winner = who_won?(choice, computer_choice)
     if winner == "player" then player_points += 1 end
     if winner == "computer" then computer_points += 1 end
 
-    display_result(winner, round, player_points, computer_points)
+    display_round_result(winner, round, player_points, computer_points)
   end
 
-  if player_points > computer_points
-    prompt("You won the game. Congratulations!")
-  else
-    prompt("You lost the game. Sorry!")
-  end
+  display_final_result(player_points, computer_points)
 
   player_points = 0
   computer_points = 0
   round = 0
-  break if play_again? == false
+
+  break if play_again? == "no"
 end
 
 prompt("Thank you for playing. Goodbye!")
