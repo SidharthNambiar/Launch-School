@@ -89,6 +89,12 @@ def play_again?
   end
 end
 
+# clears the console when invoked (Note: not guaranteed to work on all systems)
+# source: https://launchschool.com/posts/b29a5ca5
+def clear_screen
+  system('clear') || system('cls')
+end
+
 # Begining interaction with user
 
 prompt("Welcome to Rock, Paper, Scissors, Lizard, Spock!")
@@ -145,8 +151,9 @@ loop do
   player_points = 0
   computer_points = 0
   round = 0
-
   break if play_again? == "no"
+  clear_screen
 end
 
+clear_screen
 prompt("Thank you for playing. Goodbye!")
