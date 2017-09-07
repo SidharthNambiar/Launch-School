@@ -85,7 +85,7 @@ prompt("Welcome to Rock, Paper, Scissors, Lizard, Spock!")
 # main loop
 
 loop do
-  while player_points < 5 && computer_points < 5
+  while player_points < WINNING_COUNT && computer_points < WINNING_COUNT
 
     round += 1
 
@@ -123,7 +123,6 @@ loop do
     prompt("Computer chose: #{VALID_CHOICES[computer_choice]}")
 
     winner = result(choice, computer_choice)
-    puts winner
     if winner == "player" then player_points += 1 end
     if winner == "computer" then computer_points += 1 end
 
