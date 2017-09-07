@@ -1,6 +1,6 @@
 # 101 Programming Foundations
 # Lesson 2: Small Programs
-# RPS Bonus Features
+# RPS Bonus Features (Refactored)
 
 # Rules (source: http://www.samkass.com/theories/RPSSL.html)
 # Scissors cut Paper, Paper covers Rock
@@ -27,6 +27,10 @@ VALID_CHOICES = { 'r' => "rock", 'p' => "paper", 's' => "scissors",
                   'l' => "lizard", 'S' => "Spock" }
 WINNING_COUNT = 5
 
+WINNING_MOVES = { 'r' => ['l', 's'], 'l' => ['p', 'S'],
+                  'S' => ['r', 's'], 's' => ['l', 'p'],
+                  'p' => ['r', 'S'] }
+
 # Initialize Local Variables
 
 choice = ''
@@ -42,28 +46,25 @@ def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
-def winnner_of_round?(first, second)
-  ((first == 'r') && ((second == 'l') || (second == 's'))) ||
-    ((first == 'l') && ((second == 'S') || (second == 'p'))) ||
-    ((first == 'S') && ((second == 'r') || (second == 's'))) ||
-    ((first == 's') && ((second == 'p') || (second == 'l'))) ||
-    ((first == 'p') && ((second == 'r') || (second == 'S')))
-end
-
 def result(player, computer)
-  if winnner_of_round?(player, computer) then "player" end
-  if winnner_of_round?(computer, player) then "computer" end
+  if WINNING_MOVES[player].include?(computer)
+    return "player"
+  end
+  if WINNING_MOVES[computer].include?(player)
+    return "computer"
+  end
 end
 
-def display_result(round_winner, rnd, player_total, computer_total)
-  if round_winner == "player"
+def display_result(winner_of_round, rnd, player_total, computer_total)
+  if winner_of_round == "player"
     prompt("You won round #{rnd}!")
-  elsif round_winner == "computer"
+  elsif winner_of_round == "computer"
     prompt("Computer won round #{rnd}!")
   else
     prompt("Round #{rnd} is a tie!")
   end
-  prompt("Scoreboard: <PLAYER> = #{player_total}")
+  prompt("Scoreboard:")
+  prompt("<PLAYER> = #{player_total}")
   prompt("<COMPUTER> = #{computer_total}")
 end
 
@@ -122,6 +123,7 @@ loop do
     prompt("Computer chose: #{VALID_CHOICES[computer_choice]}")
 
     winner = result(choice, computer_choice)
+    puts winner
     if winner == "player" then player_points += 1 end
     if winner == "computer" then computer_points += 1 end
 
