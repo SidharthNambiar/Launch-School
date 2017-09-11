@@ -1,0 +1,54 @@
+101 Programming Foundations
+Lesson 3: Practice Problems
+Practice Problems: Easy 1 - Question 2
+
+Describe the difference between ! and ? in Ruby.
+
+And explain what would happen in the following scenarios:
+
+1. what is != and where should you use it?
+
+  Answer:
+  - The != is the inequality comparison operator.
+
+  - It returns 'true' if the both operands aren't equal
+    to each other.
+
+  - You should use it to test whether a condition is 'true' or 'false'
+
+2. put ! before something, like !user_name
+
+  Answer:
+  - Putting ! (logical NOT operator) before something reverses
+    the logical state (boolean value) of the operand.
+
+
+3. put ! after something, like words.uniq!
+
+  Answer:
+  - Putting ! after invoking the uniq method on 'word', 
+    will mutate the caller, in this case 'word'.
+    
+  - In this example (words.uniq!), the ! is part
+    of the method name, and not Ruby syntax.
+
+4. put ? before something
+
+  Answer:
+    - Putting ? before something doesn't do anyting.
+
+    - The ? is part of the ternary operator (?:)
+
+5. put ? after something
+
+  Answer:
+    - Putting ? after something doesn't do anything.
+
+    - There are method names that include ?, and usually
+      return a boolean value.
+
+6. put !! before something, like !!user_name
+
+  Answer:
+    - Putting !! before something gives the boolean
+      state of an object
