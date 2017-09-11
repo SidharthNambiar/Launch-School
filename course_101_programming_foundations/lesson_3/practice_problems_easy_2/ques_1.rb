@@ -1,6 +1,6 @@
 # 101 Programming Foundations
 # Lesson 3: Practice Problems
-# Practice Problems: Easy 1 - Question 1
+# Practice Problems: Easy 2 - Question 1
 
 # In this hash of people and their age,
 
