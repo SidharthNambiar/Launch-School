@@ -9,17 +9,13 @@
 # Lizard eats Paper, Paper disproves Spock
 # Spock vaporizes Rock, Rock crushes Scissors
 
-# Extended Requirements:
+# Requirements:
 # 1. User must be able to enter 'r' for rock, 'p' for paper, 's' for scissors,
 #    'l' for lizard, and 'S' for Spock
 # 2. Keep score of the player's and computer's wins.
 #    When either the player or computer reaches five wins,
 #    the match is over, and the winning player becomes the grand winner.
 # 3. Don't add your incrementing logic to display_results.
-
-# Modules Included
-
-require 'pry'
 
 # CONSTANT Definitions
 
@@ -30,6 +26,8 @@ POINTS_TO_WIN = 5
 WINNING_MOVES = { 'r' => ['l', 's'], 'l' => ['p', 'S'],
                   'S' => ['r', 's'], 's' => ['l', 'p'],
                   'p' => ['r', 'S'] }
+
+PLAY_AGAIN_CHOICES = ['y', 'n']
 
 # Initialize Local Variables
 
@@ -46,7 +44,7 @@ def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
-def who_won?(player, computer)
+def determine_winner(player, computer)
   if WINNING_MOVES[player].include?(computer)
     return "player"
   end
@@ -56,37 +54,54 @@ def who_won?(player, computer)
   end
 end
 
-def display_round_result(winner_of_round, round_num, pl_tally, comp_tally)
+def display_round_result(winner_of_round, pl_tally, comp_tally)
   if winner_of_round == "player"
-    prompt("You won round #{round_num}!")
+    prompt("RESULT: You won this round!")
   elsif winner_of_round == "computer"
-    prompt("Computer won round #{round_num}!")
+    prompt("RESULT: Computer won this round!")
   else
-    prompt("Round #{round_num} is a tie!")
+    prompt("RESULT: It's a tie!")
   end
 
-  prompt("Scoreboard:")
-  prompt("<PLAYER>   = #{pl_tally}")
-  prompt("<COMPUTER> = #{comp_tally}")
+  Kernel.puts("Scoreboard:")
+  Kernel.puts("<PLAYER>   = #{pl_tally}")
+  Kernel.puts("<COMPUTER> = #{comp_tally}")
 end
 
 def display_final_result(player_total, computer_total)
+  Kernel.puts("Scoreboard:")
+  Kernel.puts("<PLAYER>   = #{player_total}")
+  Kernel.puts("<COMPUTER> = #{computer_total}")
   if player_total > computer_total
-    prompt("You won the game. Congratulations!")
+    prompt("**FINAL RESULT**: You won the game. Congratulations!")
   else
-    prompt("You lost the game. Sorry!")
+    prompt("**FINAL RESULT**: You lost the game. Sorry!")
   end
 end
 
-def play_again?
-  prompt("Would you like to play again? (Enter 'y' to play again.)")
+def display_selections(pl_choice, comp_choice, rnd)
+  Kernel.puts("ROUND NUMBER: #{rnd}")
+  Kernel.puts("You chose: #{VALID_CHOICES[pl_choice]}")
+  Kernel.puts("Computer chose: #{VALID_CHOICES[comp_choice]}")
+end
 
-  answer = Kernel.gets().chomp()
-  if answer.downcase.start_with?('y')
-    "yes"
-  else
-    "no"
+def play_again?
+  prompt("Would you like to play again?
+  (Enter 'y' to play again or 'n' to quit.)")
+
+  # validate user input
+  answer = ''
+  loop do
+    answer = Kernel.gets().chomp()
+    if PLAY_AGAIN_CHOICES.include?(answer)
+      break
+    else
+      puts "Invalid input! Please enter 'y' to play again or 'n' to quit."
+    end
   end
+
+  return true if answer == 'y'
+  return false if answer == 'n'
 end
 
 # clears the console when invoked (Note: not guaranteed to work on all systems)
@@ -104,7 +119,9 @@ prompt("Welcome to Rock, Paper, Scissors, Lizard, Spock!")
 loop do
   while player_points < POINTS_TO_WIN && computer_points < POINTS_TO_WIN
 
-    round += 1
+    clear_screen if round > 0
+    display_selections(choice, computer_choice, round) if round > 0
+    display_round_result(winner, player_points, computer_points) if round > 0
 
     available_options = <<-MSG
       Choose one:
@@ -115,7 +132,9 @@ loop do
       4. Enter lower case 'l' for Lizard
       5. Enter upper case 'S' for Spock
 
-      First to 5 wins is the winner!
+      First to 5 points wins the game!
+
+      Each round is worth 1 point.
 
     MSG
 
@@ -136,22 +155,21 @@ loop do
 
     computer_choice = VALID_CHOICES.keys.sample()
 
-    prompt("You chose: #{VALID_CHOICES[choice]}")
-    prompt("Computer chose: #{VALID_CHOICES[computer_choice]}")
+    winner = determine_winner(choice, computer_choice)
+    player_points += 1 if winner == 'player'
+    computer_points += 1 if winner == 'computer'
 
-    winner = who_won?(choice, computer_choice)
-    if winner == "player" then player_points += 1 end
-    if winner == "computer" then computer_points += 1 end
-
-    display_round_result(winner, round, player_points, computer_points)
+    round += 1
   end
 
+  clear_screen
+  display_selections(choice, computer_choice, round)
   display_final_result(player_points, computer_points)
 
   player_points = 0
   computer_points = 0
   round = 0
-  break if play_again? == "no"
+  break unless play_again?
   clear_screen
 end
 
