@@ -28,3 +28,9 @@ mess_with_demographics(munsters)
 p munsters
 
 # Did the family's data get ransacked? Why or why not?
+
+# Answer:
+# Yes, the family's data did get ransacked because the parameter
+# demo_hash refrences the object that munsters refrences as well.
+# In addition, the indexed assignment being performed within the 
+# method is destructive.
