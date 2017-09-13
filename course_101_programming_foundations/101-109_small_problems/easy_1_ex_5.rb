@@ -1,6 +1,6 @@
 # Course 101 Programming Foundations
 # 101-109 Small Problems
-# Easy 2: Reverse It (Part 1)
+# Easy 1: Reverse It (Part 1)
 
 # Write a method that takes one argument, a string, 
 # and returns the same string with the words in reverse order.

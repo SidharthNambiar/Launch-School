@@ -1,6 +1,6 @@
 # Course 101 Programming Foundations
 # 101-109 Small Problems
-# Easy 2: List of Digits
+# Easy 1: List of Digits
 
 # Write a method that takes one argument, a positive integer,
 # and returns a list of the digits in the number.

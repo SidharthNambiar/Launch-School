@@ -1,6 +1,6 @@
 # Course 101 Programming Foundations
 # 101-109 Small Problems
-# Easy 2: Odd
+# Easy 1: Odd
 
 # Write a method that takes one integer argument, 
 # which may be positive, negative, or zero. 

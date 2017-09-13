@@ -1,6 +1,6 @@
 # Course 101 Programming Foundations
 # 101-109 Small Problems
-# Easy 2: How Many?
+# Easy 1: How Many?
 
 # Write a method that counts the number of occurrences of each element in a given array.
 
@@ -33,7 +33,7 @@ count_occurrences(vehicles)
 
 vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck', 
             'motorcycle', 'motorcycle', 'car', 'truck']
-            
+
 count_occurrences_alternate_method(vehicles)
 
 
