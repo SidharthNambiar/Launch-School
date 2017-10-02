@@ -8,6 +8,7 @@
 # Since the return value of the block for every iteration
 # is 'hi', which is considered by Ruby to be TRUTHY; therefore
 # every element in the original array is selected.
+
 # The select method will return the following:
 # => [1,2,3]
 

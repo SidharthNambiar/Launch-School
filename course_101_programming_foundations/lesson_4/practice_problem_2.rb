@@ -2,7 +2,8 @@
 # Lesson 4: Ruby Collections
 # Practice Problems: Methods and More Methods - Practice Problem 2
 
-# How does count treat the block's return value? 
+# How does count treat the block's return value?
+
 # Answer:
 # The count method evaluates whether the block's
 # return value is truthy; therefore, it counts all
