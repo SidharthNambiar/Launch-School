@@ -60,7 +60,8 @@ puts xor_method_2?(2.3, 343) # => false
 
 # Further Exploration
 
-# Can you think of a situation in which a boolean xor method would be useful? 
+# Can you think of a situation in which a boolean xor method would be useful?
+
 
 # Does the xor method perform short-circuit evaluation of its operands?
 # No

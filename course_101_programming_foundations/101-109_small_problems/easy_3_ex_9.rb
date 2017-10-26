@@ -47,3 +47,9 @@ puts real_palindrome_2?("Madam, I'm Adam") == true # (only alphanumerics matter)
 puts real_palindrome_2?('356653') == true
 puts real_palindrome_2?('356a653') == true
 puts real_palindrome_2?('123ab321') == false
+
+# Further Exploration
+
+# Read the documentation for String#delete, 
+# and the closely related String#count 
+# (you need to read count to get all of the information you need for delete.)
