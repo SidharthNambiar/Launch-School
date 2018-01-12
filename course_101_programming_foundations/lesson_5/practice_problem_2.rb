@@ -27,3 +27,10 @@ result = sorted_years.map do |year|
 end
 
 p result.flatten
+
+puts "\nMethod 2:"
+result_2 = books.sort_by do |book|
+  book[:published]
+end
+
+p result_2
