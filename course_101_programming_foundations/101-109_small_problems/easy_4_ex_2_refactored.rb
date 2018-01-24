@@ -1,6 +1,6 @@
 # Course 101 Programming Foundations
 # 101-109 Small Problems
-# Easy 4: Exercise 2 - What Century is That?
+# Easy 4: Exercise 2 - What Century is That? (Refactored using LS's solution)
 
 # Write a method that takes a year as input and returns the century. 
 # The return value should be a string that begins with the century number, 
@@ -16,37 +16,27 @@ def century(year)
 	# code below determines the century number
 
 	century = ''
-	century_number = 0
-	
-	if year < 101
-		return century += '1st'
-	else
-		if year%100 >= 01
-			century_number = (year/100) + 1
-		else
-			century_number = year/100
-		end
-	end
-	
-	# code below determines the appropriate suffix
+	century_number = (year/100) + 1
+	century_number -= 1 if (year%100) == 0
 
-	last_digit = century_number % 10
+	century += century_suffix(century_number)
 
-	special_case = [11,12,13]
+end
 
-	standard_case = {0 =>'th', 1 => 'st', 2 => 'nd', 3 => 'rd',
-					 4 => 'th', 5 => 'th', 6 => 'th', 7 => 'th', 
-					 8 => 'th' , 9 => 'th' }
+def century_suffix(cent_num)
 
-	if special_case.include?(century_number%100)
-		return century += century_number.to_s	+ 'th'
-	end	
+	last_digit = cent_num % 10
 
-	
-	if standard_case.has_key?(last_digit)
-		return century += century_number.to_s + standard_case[last_digit]
+	return cent_num.to_s + 'th' if [11,12,13].include?(cent_num%100)
+
+	suffix = case last_digit
+	when 1 then 'st'
+	when 2 then 'nd'
+	when 3 then 'rd'
+	else 'th'
 	end
 
+	cent_num.to_s + suffix
 
 
 end
