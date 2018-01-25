@@ -30,14 +30,10 @@ def string_to_signed_integer(str)
 	characters_in_str = str.chars
 	
 	total = 0
-	multiplier = 1	
 
-	if characters_in_str[0] == '-'
-		characters_in_str.shift
-		multiplier = -1
-	elsif characters_in_str[0] == '+'
-		characters_in_str.shift
-	end
+	multiplier = (characters_in_str[0] == '-') ? -1 : 1
+		
+	characters_in_str.shift if (characters_in_str[0] == '+') || (characters_in_str[0] == '-') 
 
 	array_of_numbers = characters_in_str.map { |char| lookup_table[char] }
 	array_of_numbers.reverse.each_with_index do |number, index|
