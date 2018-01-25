@@ -18,7 +18,50 @@
 # Your method should do this the old-fashioned way and calculate the result by analyzing the characters 
 # in the string.
 
+def string_to_integer(str)
+	
+	
+	lookup_table = {'0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, 
+					'5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9}
+
+	array_of_numbers = str.chars.map { |char| lookup_table[char] }
+
+	total = 0
+	array_of_numbers.reverse.each_with_index do |number, index|
+		total += (number)*(10**index)
+	end
+	total
+
+end
+
 # Examples
 
-string_to_integer('4321') == 4321
-string_to_integer('570') == 570
+puts string_to_integer('4321') == 4321
+puts string_to_integer('570') == 570
+
+# Further Exploration
+# Write a hexadecimal_to_integer method that converts a string representing 
+# a hexadecimal number to its integer value.
+
+def hexadecimal_to_integer(hex)
+	
+	hex.downcase!
+
+	lookup_table = {'0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, 
+					'5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9,
+				    'a' => 10, 'b' => 11, 'c' => 12, 'd' => 13,
+					'e' => 14, 'f' => 15}
+
+	array_of_numbers = hex.chars.map { |char| lookup_table[char] }
+	
+	total = 0
+	array_of_numbers.reverse.each_with_index do |number, index|
+		total += (number)*(16**index)
+	end
+	total
+end
+
+
+# Example:
+
+puts hexadecimal_to_integer('4D9f') == 19871
