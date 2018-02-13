@@ -5,7 +5,6 @@
 # Bonus Features:
 # Improved "join"
 
-
 require 'pry'
 
 INITIAL_MARKER = ' '
@@ -55,7 +54,7 @@ end
 def player_places_piece!(brd)
   square = ''
   loop do
-    prompt"Choose a square (#{empty_squares(brd).join(',')}):"
+    prompt"Choose a square (#{joinor(empty_squares(brd))}):"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt"Sorry, that's not a valid choice."
@@ -97,62 +96,47 @@ def detect_winner(brd)
   nil
 end
 
-
-
-# loop do
-#   board = initialize_board
-#   display_board(board)
-
-#   loop do
-#     display_board(board)
-
-#     player_places_piece!(board)
-#     break if someone_won?(board) || board_full?(board)
-
-#     computer_places_piece!(board)
-#     break if someone_won?(board) || board_full?(board)
-#   end
-
-#   display_board(board)
-
-#   if someone_won?(board)
-#     prompt"#{detect_winner(board)} won!"
-#   else
-#     prompt"It's a tie!"
-#   end
-
-#   prompt"Play again? (y or n)"
-#   answer = gets.chomp
-
-#   break unless answer.downcase.start_with?('y')
-# end
-
-# prompt"Thanks for playing Tic Tac Toe! Good bye!"
-
 def joinor(arr, delimiter=', ', conjunction='or')
+  return arr.join if arr.size < 2
+  return arr.join(" #{conjunction} ") if arr.size < 3
 
   temp_arr = []
-
-  if arr.size < 2
-    arr.join
-  elsif arr.size < 3
-    last_element = arr.pop
-    arr << "#{conjunction}" << last_element
-    arr.join(' ')
-  else
-    arr.each_with_index do |val, indx|
-      if indx == arr.length-1
-        temp_arr << "#{conjunction} " << val
-      else
-        temp_arr << val << "#{delimiter}"
-      end
+  arr.each_with_index do |val, indx|
+    if indx == arr.length - 1
+      temp_arr << "#{conjunction} " << val
+    else
+      temp_arr << val << delimiter
     end
-    temp_arr.join
-  end   
-
+  end
+  temp_arr.join
 end
 
-puts joinor([1, 2]) == "1 or 2"
-puts joinor([1, 2, 3]) == "1, 2, or 3"
-puts joinor([1, 2, 3], '; ') == "1; 2; or 3"
-puts joinor([1, 2, 3], ', ', 'and') == "1, 2, and 3"
+loop do
+  board = initialize_board
+  display_board(board)
+
+  loop do
+    display_board(board)
+
+    player_places_piece!(board)
+    break if someone_won?(board) || board_full?(board)
+
+    computer_places_piece!(board)
+    break if someone_won?(board) || board_full?(board)
+  end
+
+  display_board(board)
+
+  if someone_won?(board)
+    prompt"#{detect_winner(board)} won!"
+  else
+    prompt"It's a tie!"
+  end
+
+  prompt"Play again? (y or n)"
+  answer = gets.chomp
+
+  break unless answer.downcase.start_with?('y')
+end
+
+prompt"Thanks for playing Tic Tac Toe! Good bye!"
