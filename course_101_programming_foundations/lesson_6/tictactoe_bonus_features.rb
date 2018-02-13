@@ -1,6 +1,10 @@
 # Course 101 Programming Foundations
 # Lesson 6: Slightly Larger Programs
-# Walk-through: Tic Tac Toe
+# Walk-through: Tic Tac Toe Bonus Features
+
+# Bonus Features:
+# Improved "join"
+
 
 require 'pry'
 
@@ -93,32 +97,62 @@ def detect_winner(brd)
   nil
 end
 
-loop do
-  board = initialize_board
-  display_board(board)
 
-  loop do
-    display_board(board)
 
-    player_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+# loop do
+#   board = initialize_board
+#   display_board(board)
 
-    computer_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
-  end
+#   loop do
+#     display_board(board)
 
-  display_board(board)
+#     player_places_piece!(board)
+#     break if someone_won?(board) || board_full?(board)
 
-  if someone_won?(board)
-    prompt"#{detect_winner(board)} won!"
+#     computer_places_piece!(board)
+#     break if someone_won?(board) || board_full?(board)
+#   end
+
+#   display_board(board)
+
+#   if someone_won?(board)
+#     prompt"#{detect_winner(board)} won!"
+#   else
+#     prompt"It's a tie!"
+#   end
+
+#   prompt"Play again? (y or n)"
+#   answer = gets.chomp
+
+#   break unless answer.downcase.start_with?('y')
+# end
+
+# prompt"Thanks for playing Tic Tac Toe! Good bye!"
+
+def joinor(arr, delimiter=', ', conjunction='or')
+
+  temp_arr = []
+
+  if arr.size < 2
+    arr.join
+  elsif arr.size < 3
+    last_element = arr.pop
+    arr << "#{conjunction}" << last_element
+    arr.join(' ')
   else
-    prompt"It's a tie!"
-  end
+    arr.each_with_index do |val, indx|
+      if indx == arr.length-1
+        temp_arr << "#{conjunction} " << val
+      else
+        temp_arr << val << "#{delimiter}"
+      end
+    end
+    temp_arr.join
+  end   
 
-  prompt"Play again? (y or n)"
-  answer = gets.chomp
-
-  break unless answer.downcase.start_with?('y')
 end
 
-prompt"Thanks for playing Tic Tac Toe! Good bye!"
+puts joinor([1, 2]) == "1 or 2"
+puts joinor([1, 2, 3]) == "1, 2, or 3"
+puts joinor([1, 2, 3], '; ') == "1; 2; or 3"
+puts joinor([1, 2, 3], ', ', 'and') == "1, 2, and 3"
