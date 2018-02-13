@@ -3,7 +3,10 @@
 # Walk-through: Tic Tac Toe Bonus Features
 
 # Bonus Features:
-# Improved "join"
+# 1. Improved "join"
+# 2. Keep Score
+# =>  Keep score of how many times the player and computer each win. 
+# =>  Don't use global or constant variables. Make it so that the first player to 5 wins the game.
 
 require 'pry'
 
@@ -22,9 +25,10 @@ end
 # Display board
 
 # rubocop: disable  Metrics/AbcSize
-def display_board(brd)
+def display_board(brd, pl_total, com_total)
   system 'clear'
   puts "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
+  puts "\nPlayer Score: #{pl_total} | Computer Score: #{com_total}"
   puts ""
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}  "
@@ -78,15 +82,6 @@ end
 
 def detect_winner(brd)
   WINNING_LINES.each do |line|
-    # if brd[line[0]] == PLAYER_MARKER &&
-    #    brd[line[1]] == PLAYER_MARKER &&
-    #    brd[line[2]] == PLAYER_MARKER
-    #   return 'Player'
-    # elsif brd[line[0]] == COMPUTER_MARKER &&
-    #       brd[line[1]] == COMPUTER_MARKER &&
-    #       brd[line[2]] == COMPUTER_MARKER
-    #   return 'Computer'
-    # end
     if brd.values_at(*line).count(PLAYER_MARKER) == 3
       return 'Player'
     elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
@@ -111,32 +106,51 @@ def joinor(arr, delimiter=', ', conjunction='or')
   temp_arr.join
 end
 
-loop do
-  board = initialize_board
-  display_board(board)
 
+loop do 
+  player_total = 0
+  computer_total = 0
   loop do
-    display_board(board)
+    board = initialize_board
+    display_board(board, player_total, computer_total)
 
-    player_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+    loop do
+      display_board(board, player_total, computer_total)
 
-    computer_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+
+      computer_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    end
+
+    # display_board(board, player_total, computer_total)
+
+    if someone_won?(board)
+      player_total += 1 if detect_winner(board) == 'Player'
+      computer_total += 1 if detect_winner(board) == 'Computer'
+      display_board(board, player_total, computer_total)
+      prompt"#{detect_winner(board)} won this round!"
+    else
+      prompt"It's a tie!"
+    end
+
+    if player_total == 5
+      prompt"Player has won 5 games. Congrats!"
+      break
+    elsif computer_total == 5
+      prompt"Computer has won 5 games. Congrats!"
+      break
+    end
+
+    prompt"Hit any key to move to the next round."
+    answer = gets
   end
 
-  display_board(board)
+prompt"Play again? (y or n)"
+answer = gets.chomp
 
-  if someone_won?(board)
-    prompt"#{detect_winner(board)} won!"
-  else
-    prompt"It's a tie!"
-  end
+break unless answer.downcase.start_with?('y')
 
-  prompt"Play again? (y or n)"
-  answer = gets.chomp
-
-  break unless answer.downcase.start_with?('y')
 end
-
 prompt"Thanks for playing Tic Tac Toe! Good bye!"
