@@ -2,7 +2,7 @@
 # Lesson 6: Slightly Larger Programs
 # Walk-through: Tic Tac Toe Bonus Features
 
-# Bonus Features (Implemented)
+# Bonus Features (Status: Implemented)
 # 1. Improved "join"
 # 2. Keep Score
 # 3. Computer AI: Defense
@@ -10,7 +10,7 @@
 # 5. Computer turn refinements
 # 6. Improve the game loop
 
-# On your own ideas (Not implemented)
+# On your own ideas (Status: Not implemented)
 # 1. Minimax algorithm
 # 2. Bigger board
 # 3. More players
