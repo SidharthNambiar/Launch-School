@@ -71,27 +71,16 @@ def determine_ace_value
   1
 end
 
-def deal_card_to_player(deck, num)
-  player_deck = []
-
+def deal_card(deck, num)
+  arr = []
   num.times do
     card = deck.sample
-    player_deck << card
+    arr << card
     deck.delete(card)
   end
-  player_deck
+  arr
 end
 
-
-def deal_card_to_dealer(deck, num)
-  dealer_deck = []
-  num.times do 
-    card = deck.sample
-    dealer_deck << card
-    deck.delete(card)
-  end
-  dealer_deck
-end
 
 def display(player_deck, dealer_deck)
   system 'clear'
@@ -104,38 +93,86 @@ puts "Welcome to Twenty-One!"
 loop do
   system 'clear' 
   deck = initialize_deck
-  player_deck = deal_card_to_player(deck, 2)
-  dealer_deck = deal_card_to_dealer(deck, 2)
+  player_deck = deal_card(deck, 2)
+  dealer_deck = deal_card(deck, 2)
 
   player_deck_value = determine_deck_value(player_deck)
   dealer_deck_value = determine_deck_value(dealer_deck)
 
   display(player_deck, dealer_deck)
 
+  player_flag = 'on'
 
-  loop do 
-    prompt "Do you want to 'hit' or 'stay'? (Enter 'h/H' for hit or 's/S' for stay.)"
-    player_response = gets.chomp.downcase
+  loop do
 
-    if player_response == 'h'
-      deal_card_to_player(deck, 1)
+  # player turn
+  prompt "Do you want to 'hit' or 'stay'?"
+  prompt "Enter 'h' to hit or 's' to stay."
+  player_move = gets.chomp.downcase
+  winner = ''
+  
+
+    # if player hits, insert a card from the deck into the existing array
+
+  while player_flag == 'on' do
+    if player_move == 'h'
+      player_deck += deal_card(deck, 1)
       player_deck_value = determine_deck_value(player_deck)
-      deal_card_to_dealer(deck, 1) if dealer_deck_value <= 17
-      display(player_deck, dealer_deck)
-
-    elsif player_response == 's'
-      break
-    else
-      prompt "Invalid response!"
     end
+    
+    if player_move == 's'
+      player_flag = 'off'
+    end
+    break
+
   end
 
 
+  while dealer_deck_value < 18
+    dealer_deck += deal_card(deck, 1)
+    dealer_deck_value = determine_deck_value(dealer_deck)
+  end
+    
+
+
+    # if player_deck_value is greater than 21, declare dealer the winner.
+
+    # if player stays, calculate total value and move on to the dealer.
+
+
+    # dealer turn
+
+    # if dealer hits, insert a card from the deck into the existing array
+    # if dealer_deck_value is greater than 21, declare player the winner.
+    # if dealer stays, calculate total value and move on to the player
+
+    # check winner if any
+    # => winning conditions
+    # => 1. if both stay, one closest to or equal to 21 wins
+    # => 2. if either one busts, then the other wins
+    # =>  Bust conditions:
+    # =>  a. if value is greater than 21
+
+  end
+  # loop do 
+  #   prompt "Do you want to 'hit' or 'stay'? (Enter 'h/H' for hit or 's/S' for stay.)"
+  #   player_response = gets.chomp.downcase
+
+  #   if player_response == 'h'
+  #     deal_card_to_player(deck, 1)
+  #     player_deck_value = determine_deck_value(player_deck)
+  #     deal_card_to_dealer(deck, 1) if dealer_deck_value <= 17
+  #     display(player_deck, dealer_deck)
+
+  #   elsif player_response == 's'
+  #     break
+  #   else
+  #     prompt "Invalid response!"
+  #   end
+  # end
+
+
  
-
-
-
-
   p player_deck
   p dealer_deck
   p player_deck_value
