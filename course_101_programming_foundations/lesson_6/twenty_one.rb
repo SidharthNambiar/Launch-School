@@ -30,7 +30,7 @@ require 'pry'
 SUITS = ['h', 'd', 'c', 's']  # heart, diamond, club, spade
 NON_FACE_VALUE_CARDS = ['j', 'q', 'k', 'a'] # jack, queen, king, ace
 FACE_VALUE_CARDS = (2..10).to_a
-GAMEPLAY_RESPONSES = ['h', 's']
+VALID_GAMEPLAY_RESPONSES = ['h', 's']
 NON_FACE_VALUE_CARDS_DEF = {'j' => 'Jack', 'q' => 'Queen', 'k' => 'King', 'a' => 'Ace'}
 
 
@@ -118,24 +118,38 @@ end
 
 def display(player_deck, dealer_deck, player_deck_val, dealer_deck_val)
   system 'clear'
-  # puts "Dealer has: #{dealer_deck.last} and unknown card"
-  puts "Dealer has: #{dealer_deck}. Total value = #{dealer_deck_val}"
-  
-  player_deck_name= ''
+  player_deck_name = ''
   dealer_deck_name = ''
-  player_deck_name = get_deck_name(player_deck) 
+  dealer_deck_name = determine_card_name(dealer_deck.first)
+  player_deck_name = get_deck_name(player_deck)
 
-  puts "You have: #{player_deck_name}. Total value: #{player_deck_val}"
+  prompt "Dealer has: #{dealer_deck_name} and unknown card(s)."
+  prompt "You have: #{player_deck_name}."
+  prompt "Player total value: #{player_deck_val}"
+  
+end
+
+def display_all(player_deck, dealer_deck, player_deck_val, dealer_deck_val)
+  #system 'clear'
+  player_deck_name = ''
+  dealer_deck_name = ''
+  dealer_deck_name = get_deck_name(dealer_deck)
+  player_deck_name = get_deck_name(player_deck)
+
+  prompt "Dealer has: #{dealer_deck_name}."
+  prompt "Dealer total value: #{dealer_deck_val}"
+  puts "\n"
+  prompt "You have: #{player_deck_name}."
+  prompt "Player total value: #{player_deck_val}"
 end
 
 def determine_winner(player_total, dealer_total)
   if player_total > dealer_total
-    prompt "Player won the game!"
-  elsif player_total == dealer_total
-    prompt "It's a tie!"
-  else
-    prompt "Dealer won the game!"
+    return 'Player'
+  elsif player_total < dealer_total
+    return 'Dealer'
   end
+  nil
 end
 
 loop do
@@ -147,18 +161,29 @@ loop do
   dealer_deck_value = 0
   player_deck_value = determine_deck_value(player_deck)
   dealer_deck_value = determine_deck_value(dealer_deck)
+  player_move = ''
+  winner = ''
 
   display(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
-  player_move = ''
 
   loop do
     
     # Deal player cards until player stays
     while player_move != 's' do
-      puts "\n"
-      prompt "Do you want to 'hit' or 'stay'?"
-      prompt "Enter 'h' to hit or 's' to stay."
-      player_move = gets.chomp.downcase
+            
+      loop do
+
+        puts "\n"
+        prompt "Do you want to 'hit' or 'stay'?"
+        prompt "Enter 'h' to hit or 's' to stay. (case insensitive)"
+        player_move = gets.chomp.downcase
+        break if VALID_GAMEPLAY_RESPONSES.include?(player_move)
+        #display(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
+        prompt "Invalid Entry! Try again!"
+      end
+
+
+
       if player_move == 'h'
         player_deck += deal_card(deck, 1)
         player_deck_value = determine_deck_value(player_deck)
@@ -168,10 +193,9 @@ loop do
     end
     
     # check if player bust
-    if player_deck_value > 21
-      prompt "Dealer won the game!"
-      break
-    end
+    winner = 'Dealer' if player_deck_value > 21
+    break if winner.empty? == false
+    
     
     # Deal cards to player as long as deck value is less than 18
     while dealer_deck_value < 18
@@ -182,14 +206,22 @@ loop do
    display(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
 
     # check if player bust
-    if dealer_deck_value > 21
-      prompt "Player won the game!"
-      break
-    end
-    
-    determine_winner(player_deck_value, dealer_deck_value)
+    winner = 'Player' if dealer_deck_value > 21
+    break if winner.empty? == false
+
+    winner = determine_winner(player_deck_value, dealer_deck_value)
     break
   end
+  
+  system 'clear'
+  display_all(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
+  puts "\n"
+
+  puts winner == nil ? "It's a tie!" : "#{winner} won the game!"
+
+  
+
+
  
   prompt "Do you want to play again? (Enter 'y' or 'n')"
   answer = gets.chomp
