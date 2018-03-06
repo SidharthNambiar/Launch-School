@@ -157,7 +157,6 @@ loop do
 
     end
     # check if player bust
-    
     winner = 'Dealer' if busted?(player_deck_value)
     break if winner.empty? == false
     # Deal cards to player as long as deck value is less than 18
