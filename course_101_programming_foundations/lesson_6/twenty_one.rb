@@ -22,7 +22,7 @@ def initialize_deck
     FACE_VALUE_CARDS.each { |card| deck << (card.to_s + suit) }
     NON_FACE_VALUE_CARDS.each { |card| deck << (card + suit) }
   end
-  deck
+  deck.shuffle
 end
 
 def determine_card_value(card, curr_deck_value)
@@ -99,7 +99,6 @@ def display_all(player_deck, dealer_deck, player_deck_val, dealer_deck_val)
   prompt "Dealer had: #{dealer_deck_name}. Total value: #{dealer_deck_val}"
   puts "\n"
   prompt "You had: #{player_deck_name}. Total value: #{player_deck_val}"
-  puts "\n"
 end
 
 def determine_winner(player_total, dealer_total)
@@ -116,6 +115,10 @@ def display_winner(the_winner)
   puts "\n********************"
   puts the_winner.nil? ? "It's a tie!" : "#{the_winner} won the game!"
   puts "********************"
+end
+
+def busted?(deck_value)
+  deck_value > 21
 end
 
 loop do
@@ -154,7 +157,8 @@ loop do
 
     end
     # check if player bust
-    winner = 'Dealer' if player_deck_value > 21
+    
+    winner = 'Dealer' if busted?(player_deck_value)
     break if winner.empty? == false
     # Deal cards to player as long as deck value is less than 18
     while dealer_deck_value < 18
@@ -163,16 +167,20 @@ loop do
     end
     display(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
     # check if player bust
-    winner = 'Player' if dealer_deck_value > 21
+    winner = 'Player' if busted?(dealer_deck_value)
     break if winner.empty? == false
     winner = determine_winner(player_deck_value, dealer_deck_value)
     break
   end
 
   display_winner(winner)
-  display_all(player_deck, dealer_deck, player_deck_value, dealer_deck_value) 
+  prompt "Dealer busted!" if busted?(dealer_deck_value)
+  prompt "Player busted!" if busted?(player_deck_value)
+  puts "\n"
+  display_all(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
 
   loop do
+    puts "\n"
     prompt "Do you want to play again?"
     prompt "Hit 'y' to play again or 'n' to exit the game. (case insensitive)"
     answer = gets.chomp
