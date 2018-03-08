@@ -38,6 +38,10 @@
 
 SUITS = ['H', 'D', 'S', 'C']
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+DELAY_SEC = 1
+DEALER_DEAL_LIMIT = 17
+WINNING_NUMBER = 21
+
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -64,22 +68,22 @@ def total(cards)
 
   # correct for Aces
   values.select { |value| value == "A" }.count.times do
-    sum -= 10 if sum > 21
+    sum -= 10 if sum > WINNING_NUMBER
   end
 
   sum
 end
 
 def busted?(total_card_value)
-  total_card_value > 21
+  total_card_value > WINNING_NUMBER
 end
 
 # :tie, :dealer, :player, :dealer_busted, :player_busted
 def detect_result(dealer_cards_total, player_cards_total)
  
-  if player_cards_total > 21
+  if player_cards_total > WINNING_NUMBER
     :player_busted
-  elsif dealer_cards_total > 21
+  elsif dealer_cards_total > WINNING_NUMBER
     :dealer_busted
   elsif dealer_cards_total < player_cards_total
     :player
@@ -91,6 +95,7 @@ def detect_result(dealer_cards_total, player_cards_total)
 end
 
 def display_result(dealer_cards_total, player_cards_total)
+  system 'clear'
   result = detect_result(dealer_cards_total, player_cards_total)
 
   case result
@@ -99,9 +104,9 @@ def display_result(dealer_cards_total, player_cards_total)
   when :dealer_busted
     prompt "Dealer busted! You win this round!"
   when :player
-    prompt "You win!"
+    prompt "You win this round!"
   when :dealer
-    prompt "Dealer wins!"
+    prompt "Dealer wins this round!"
   when :tie
     prompt "It's a tie!"
   end
@@ -115,11 +120,12 @@ def play_again?
 end
 
 def display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
-
+  puts "\n"
   puts "=============="
-  prompt "Dealer has #{dealer_cards}, for a total of: #{dealer_total}"
-  prompt "Player has #{player_cards}, for a total of: #{player_total}"
+  prompt "Dealer had #{dealer_cards}, for a total of: #{dealer_total}"
+  prompt "Player had #{player_cards}, for a total of: #{player_total}"
   puts "=============="
+  puts "\n"
 end
 
 def display_tally(dealer_tally, player_tally)
@@ -129,6 +135,7 @@ def display_tally(dealer_tally, player_tally)
 end
 
 loop do
+  system 'clear'
   prompt "Welcome to Twenty-One!"
   player_tally = 0
   dealer_tally = 0
@@ -155,7 +162,8 @@ loop do
     dealer_total = total(dealer_cards)
 
     puts "\n"
-    prompt "*****ROUND #{round_number}*****"
+    puts "          ROUND #{round_number}         "
+    puts "\n"
     prompt "Dealer has #{dealer_cards[0]} and ?"
     prompt "You have: #{player_cards[0]} and #{player_cards[1]}, for a total of #{player_total}."
 
@@ -183,8 +191,10 @@ loop do
 
     if busted?(player_total)
       display_result(dealer_total, player_total)
+      display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
       dealer_tally += 1
       display_tally(dealer_tally, player_tally)
+      sleep(DELAY_SEC)
       dealer_tally > 4 ? break : next
     else
       prompt "You stayed at #{player_total}"
@@ -195,7 +205,7 @@ loop do
     prompt "Dealer turn..."
 
     loop do
-      break if total(dealer_cards) >= 17
+      break if total(dealer_cards) >= DEALER_DEAL_LIMIT
       prompt "Dealer hits!"
       dealer_cards << deck.pop
       prompt "Dealer's cards are now: #{dealer_cards}"
@@ -204,30 +214,33 @@ loop do
 
     if busted?(dealer_total)
       prompt "Dealer total is now: #{dealer_total}"
-      display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
       display_result(dealer_total, player_total)
+      display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
       player_tally += 1
       display_tally(dealer_tally, player_tally)
+      sleep(DELAY_SEC)
       player_tally > 4 ? break : next
       # play_again? ? next : break
     else
       prompt "Dealer stays at #{dealer_total}"
     end
 
-    display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
-
     display_result(dealer_total, player_total)
+    display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
 
     dealer_tally +=1 if dealer_total > player_total
     player_tally += 1 if player_total > dealer_total
     display_tally(dealer_tally, player_tally)
+    sleep(DELAY_SEC)
     break if dealer_tally > 4
     break if player_tally > 4
 
   #  break unless play_again?
 
   end
-  puts player_tally > dealer_tally ? "Player won the game!" : "Dealer won the game!"
+  puts "\n"
+  puts player_tally > dealer_tally ? "*****Player won the game!*****" : "*****Dealer won the game!*****"
+  puts "\n"
   break unless play_again?
 end
 
