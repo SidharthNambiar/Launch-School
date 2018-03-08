@@ -53,9 +53,8 @@ end
 def deal_card(deck, num)
   arr = []
   num.times do
-    card = deck.sample
+    card = deck.pop
     arr << card
-    deck.delete(card)
   end
   arr
 end
@@ -135,7 +134,7 @@ loop do
   answer = ''
 
   display(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
-
+  p deck.size
   loop do
     # ask player to hit or stay
     while player_move != 's'
@@ -152,13 +151,14 @@ loop do
         player_deck += deal_card(deck, 1)
         player_deck_value = determine_deck_value(player_deck)
         display(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
-        break if player_deck_value > 21
+        break if busted?(player_deck_value)
       end
-
     end
+
     # check if player bust
     winner = 'Dealer' if busted?(player_deck_value)
     break if winner.empty? == false
+
     # Deal cards to player as long as deck value is less than 18
     while dealer_deck_value < 18
       dealer_deck += deal_card(deck, 1)
@@ -177,6 +177,7 @@ loop do
   prompt "Player busted!" if busted?(player_deck_value)
   puts "\n"
   display_all(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
+  p deck.size
 
   loop do
     puts "\n"
