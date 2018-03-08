@@ -38,9 +38,23 @@ def determine_card_value(card, curr_deck_value)
   end
 end
 
+def sort_deck(deck)
+  deck_with_aces = []
+  remaining_deck = []
+  deck.each do |card|
+    if card.chars[0] == 'a'
+      deck_with_aces << card
+    else
+      remaining_deck << card
+    end
+  end
+  remaining_deck + deck_with_aces
+end
+
 def determine_deck_value(deck)
   curr_deck_value = 0
-  deck.each do |card|
+  sorted_deck = sort_deck(deck)
+  sorted_deck.each do |card|
     curr_deck_value += determine_card_value(card, curr_deck_value)
   end
   curr_deck_value
@@ -134,7 +148,6 @@ loop do
   answer = ''
 
   display(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
-  p deck.size
   loop do
     # ask player to hit or stay
     while player_move != 's'
@@ -177,7 +190,6 @@ loop do
   prompt "Player busted!" if busted?(player_deck_value)
   puts "\n"
   display_all(player_deck, dealer_deck, player_deck_value, dealer_deck_value)
-  p deck.size
 
   loop do
     puts "\n"
