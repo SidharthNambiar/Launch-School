@@ -3,13 +3,14 @@
 # Assignment: Twenty-One Bonus Features
 
 # Bonus Features
-# => 1 Calculating the total.
+# => 1  (Status: Implemented)
+# Calculating the total.
 # If we cache each player's total like this, will it continue to update correctly throughout the game? 
 # If not, at what point do we need to update each player's total?
 
 # => Answer: We need update each player's total after everytime after the cards are dealt.
 
-# => 2
+# => 2 
 # We use the play_again? three times: after the player busts, after the dealer busts, 
 # or after both participants stay and compare cards. Why is the last call to play_again? 
 # a little different from the previous two?
@@ -18,16 +19,16 @@
 # => unlike before 'next' doesn't need to be explicitly called since the conditional check is 
 # => being evaluated at the end.
 
-# => 3
+# => 3 (Status: Implemented)
 # Ending the round. As mentioned above, there are 3 places where the round can end 
 # and we call play_again? each time. But another improvement we'd like to make is 
 # to give it a consistent end-of-round output. Right now, we get a grand output only 
 # after comparing cards. Can we extract this to a method and use it in the other two end-of-round areas?
 
-# => 4
+# => 4 (Status: Implemented)
 # Keep track of who won each round, and declare whoever reaches 5 points first as the winner.
 
-# => 5
+# =>  (Status: Implemented)
 # What if we wanted to change this game to Thirty-One, 
 # and the dealer hits until 27? Or what if our game should be Forty-One? 
 # Or Fifty-One? In other words, the two major values right now -- 21 and 17 
