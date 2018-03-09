@@ -3,46 +3,30 @@
 # Assignment: Twenty-One Bonus Features
 
 # Bonus Features
-# => 1  (Status: Implemented)
-# Calculating the total.
-# If we cache each player's total like this, will it continue to update correctly throughout the game? 
-# If not, at what point do we need to update each player's total?
+# => 1 (Status: Implemented)
+# => Answer: We need update each player's total after
+# => everytime after the cards are dealt.
 
-# => Answer: We need update each player's total after everytime after the cards are dealt.
-
-# => 2 
-# We use the play_again? three times: after the player busts, after the dealer busts, 
-# or after both participants stay and compare cards. Why is the last call to play_again? 
-# a little different from the previous two?
-
-# => Answer: The last call to play_again? is a little different from the previous two because
-# => unlike before 'next' doesn't need to be explicitly called since the conditional check is 
+# => 2
+# Why is the last call to play_again? a little
+# different from the previous two?
+# => Answer: The last call to play_again? is a little different
+# => from the previous two because
+# => unlike before 'next' doesn't need to be explicitly
+# => called since the conditional check is
 # => being evaluated at the end.
 
 # => 3 (Status: Implemented)
-# Ending the round. As mentioned above, there are 3 places where the round can end 
-# and we call play_again? each time. But another improvement we'd like to make is 
-# to give it a consistent end-of-round output. Right now, we get a grand output only 
-# after comparing cards. Can we extract this to a method and use it in the other two end-of-round areas?
 
 # => 4 (Status: Implemented)
-# Keep track of who won each round, and declare whoever reaches 5 points first as the winner.
 
 # =>  (Status: Implemented)
-# What if we wanted to change this game to Thirty-One, 
-# and the dealer hits until 27? Or what if our game should be Forty-One? 
-# Or Fifty-One? In other words, the two major values right now -- 21 and 17 
-# -- are quite arbitrary. We can store them as constants and refer to the 
-# constants throughout the program. If we wanted to change the game to 
-# Whatever-One, it's just a matter of updating those constants.
-
 
 SUITS = ['H', 'D', 'S', 'C']
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-DELAY_SEC = 1
+DELAY_SEC = 0
 DEALER_DEAL_LIMIT = 17
 WINNING_NUMBER = 21
-
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -71,7 +55,6 @@ def total(cards)
   values.select { |value| value == "A" }.count.times do
     sum -= 10 if sum > WINNING_NUMBER
   end
-
   sum
 end
 
@@ -81,7 +64,6 @@ end
 
 # :tie, :dealer, :player, :dealer_busted, :player_busted
 def detect_result(dealer_cards_total, player_cards_total)
- 
   if player_cards_total > WINNING_NUMBER
     :player_busted
   elsif dealer_cards_total > WINNING_NUMBER
@@ -120,7 +102,7 @@ def play_again?
   answer.downcase.start_with?('y')
 end
 
-def display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
+def display_all(dealer_cards, dealer_total, player_cards, player_total)
   puts "\n"
   puts "=============="
   prompt "Dealer had #{dealer_cards}, for a total of: #{dealer_total}"
@@ -130,7 +112,6 @@ def display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
 end
 
 def display_tally(dealer_tally, player_tally)
-  
   prompt "Dealer Points: #{dealer_tally}"
   prompt "Player Points: #{player_tally}"
 end
@@ -143,7 +124,6 @@ loop do
   round_number = 0
 
   loop do
-
     # initialize vars
     deck = initialize_deck
     player_cards = []
@@ -151,7 +131,6 @@ loop do
     player_total = 0
     dealer_total = 0
     round_number += 1
-    
 
     # initial deal
     2.times do
@@ -168,9 +147,8 @@ loop do
     prompt "Dealer has #{dealer_cards[0]} and ?"
     prompt "You have: #{player_cards[0]} and #{player_cards[1]}, for a total of #{player_total}."
 
-
     # player turn
-    loop do   
+    loop do
       player_turn = nil
       loop do
         prompt "Would you like to (h)it or (s)tay?"
@@ -192,7 +170,7 @@ loop do
 
     if busted?(player_total)
       display_result(dealer_total, player_total)
-      display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
+      display_all(dealer_cards, dealer_total, player_cards, player_total)
       dealer_tally += 1
       display_tally(dealer_tally, player_tally)
       sleep(DELAY_SEC)
@@ -200,7 +178,6 @@ loop do
     else
       prompt "You stayed at #{player_total}"
     end
-
 
     # dealer turn
     prompt "Dealer turn..."
@@ -216,7 +193,7 @@ loop do
     if busted?(dealer_total)
       prompt "Dealer total is now: #{dealer_total}"
       display_result(dealer_total, player_total)
-      display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
+      display_all(dealer_cards, dealer_total, player_cards, player_total)
       player_tally += 1
       display_tally(dealer_tally, player_tally)
       sleep(DELAY_SEC)
@@ -227,20 +204,18 @@ loop do
     end
 
     display_result(dealer_total, player_total)
-    display_grand_output(dealer_cards, dealer_total, player_cards, player_total)
+    display_all(dealer_cards, dealer_total, player_cards, player_total)
 
-    dealer_tally +=1 if dealer_total > player_total
+    dealer_tally += 1 if dealer_total > player_total
     player_tally += 1 if player_total > dealer_total
     display_tally(dealer_tally, player_tally)
     sleep(DELAY_SEC)
     break if dealer_tally > 4
     break if player_tally > 4
-
-  #  break unless play_again?
-
   end
+
   puts "\n"
-  puts player_tally > dealer_tally ? "*****Player won the game!*****" : "*****Dealer won the game!*****"
+  puts player_tally > dealer_tally ? "*Player won the gamel!*" : "*Dealer won the game!*"
   puts "\n"
   break unless play_again?
 end
