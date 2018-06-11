@@ -59,6 +59,7 @@ puts integer_to_string_version_2(0) == '0'
 puts integer_to_string_version_2(5000) == '5000'
 
 # Further Exploration
+
 # One thing to note here is the String#prepend method; 
 # unlike most string mutating methods, the name of this method does not end with a !. 
 # However, it is still a mutating method - it changes the string in place.

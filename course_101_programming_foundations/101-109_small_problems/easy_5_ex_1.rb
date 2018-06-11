@@ -32,5 +32,11 @@ puts ascii_value('') == 0
 
 # char.ord.mystery == char
 # where mystery is our mystery method. 
-# Can you determine what method name should be used in place of mystery? 
+# Can you determine what method name should be used in place of mystery?
+# Answer:
+# The mystery method is Intger#chr
+
 # What happens if you try this with a longer string instead of a single character?
+# Answer:
+# The boolean value will be false because ord will return the ASCII order of the zero-indexed character
+# in the string.

@@ -21,6 +21,15 @@ def digit_list_method_2(pos_int)
   digits
 end
 
+def digit_list_method_3(pos_int)
+   result = []
+  while pos_int != 0
+    pos_int, remainder = pos_int.divmod(10)
+    result.unshift(remainder)
+  end
+  result
+end
+
 puts "Method 1:"
 puts digit_list_method_1(12345) == [1, 2, 3, 4, 5]     # => true
 puts digit_list_method_1(7) == [7]                     # => true
@@ -32,3 +41,9 @@ puts digit_list_method_2(12345) == [1, 2, 3, 4, 5]     # => true
 puts digit_list_method_2(7) == [7]                     # => true
 puts digit_list_method_2(375290) == [3, 7, 5, 2, 9, 0] # => true
 puts digit_list_method_2(444) == [4, 4, 4]             # => true
+
+puts "\nMethod 3:"
+puts digit_list_method_3(12345) == [1, 2, 3, 4, 5]     # => true
+puts digit_list_method_3(7) == [7]                     # => true
+puts digit_list_method_3(375290) == [3, 7, 5, 2, 9, 0] # => true
+puts digit_list_method_3(444) == [4, 4, 4]             # => true
