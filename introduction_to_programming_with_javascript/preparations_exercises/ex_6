@@ -1,0 +1,14 @@
+Introduction to Programming with JavaScript
+Preparations
+Exercise 6
+
+Which of the following names satisfy the style guidelines for variable names?
+
+index - VALID
+CatName - INVALID; only VALID for constructor functions
+snake_case - INVALID; not camelCase
+lazyDog - VALID
+quick_Fox - INVALID due to underscore
+1stCharacter - INVALID; first charachter isn't alphabetic
+operand2 - VALID
+BIG_NUMBER - INVALID; only VALID for constants

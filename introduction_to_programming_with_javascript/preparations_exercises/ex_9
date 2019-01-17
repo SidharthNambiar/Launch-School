@@ -1,0 +1,14 @@
+Introduction to Programming with JavaScript
+Preparations
+Exercise 9
+
+Which of the following names don't satisfy the style guidelines for naming variables, functions, or constants?
+
+index
+CatName
+snake_case - INVALID
+lazyDog
+quick_Fox - INVALID
+1stCharacter - INVALID
+operand2
+BIG_NUMBER

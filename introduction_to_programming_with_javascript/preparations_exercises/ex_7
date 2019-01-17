@@ -1,0 +1,14 @@
+Introduction to Programming with JavaScript
+Preparations
+Exercise 7
+
+Which of the following names satisfy the style guidelines for function names?
+
+index - VALID
+CatName - VALID since PascalFormat is acceptable for constructor functions
+snake_case - INVALID
+lazyDog - VALID
+quick_Fox - INVALID
+1stCharacter -INVALID
+operand2 - VALID
+BIG_NUMBER -INVALID

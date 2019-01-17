@@ -1,0 +1,26 @@
+Introduction to Programming with JavaScript
+Preparations
+Exercise 5
+
+
+Identify the Constructors for each of the following methods and classify each method as either a "Static" 
+or a "Prototype" method:
+
+substring 
+Constructtor(s):String
+Type: Instance method
+
+create
+Constructtor(s): Object
+Type: Static method
+
+fromCharCode
+Constructtor(s):String
+Type: Static method
+
+slice
+Constructtor(s):Array, String
+Type: Instance method
+
+Multiple constructors may provide some methods; be sure to list them all in your answer. 
+You can limit your search for methods to the String, Object, Array, and Number constructors.
