@@ -1,0 +1,10 @@
+// Introduction to Programming with JavaScript
+// Functions
+// add.js
+
+function add(a, b) {
+    return a + b;
+  }
+  
+  let twoAndThree = add(2, 3);
+  console.log(twoAndThree); // => 5
