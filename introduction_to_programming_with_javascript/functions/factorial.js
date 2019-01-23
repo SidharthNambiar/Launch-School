@@ -26,8 +26,21 @@ function times(number1, number2) {
   //console.log(result);
   return result;
 }
+console.log("Method 1: ")
 console.log(times(1,1));
 console.log(times(2,1));
 console.log(times(3,2));
 console.log(times(times(4,3),2));
 console.log(times(times(times(5,4),3),2));
+
+console.log("\nMethod 2: ")
+
+function factorial(num){
+
+    return num <= 1 ? 1 : num*(factorial(num-1));
+}
+console.log(factorial(1));
+console.log(factorial(2));
+console.log(factorial(3));
+console.log(factorial(4));
+console.log(factorial(5));
